@@ -10,31 +10,54 @@ export default class Lifecycle extends Component {
   }
   
 //   react16.3之前的生命周期
-componentWillMount() {
+// construct
+// componentWillMount() {
+    
+// }
+// render（）
+// componentDidMount() {
+ 
+// }
+// 更新
+// componentWillReceiveProps(nextProps,nextState) {
+// //   父组件更新子组件获取新属性
+// }
+// shouldComponentUpdate(nextProps, nextState, nextContext) {
+//     //  当前组件是否应该更新
+// }
+// componentWillUpdate() {
+//     // 组件将要更新
+// }
+// componentDidUpdate(prevProps, prevState) {
+//     // 组件已经更新
+// }
+
+// react 16.6之后生命周期
+// 挂载阶段
+static getDerivedStateFromProps(nextProps, prevState) {
     
 }
+// render（）
 componentDidMount() {
- 
+    
 }
-componentWillReceiveProps(nextProps,nextState) {
-//   父组件更新子组件获取新属性
+// 更新
+static getDerivedStateFromProps(nextProps, prevState) {
+    
 }
 shouldComponentUpdate(nextProps, nextState, nextContext) {
-    //  当前组件是否应该更新
+     
 }
-componentWillUpdate() {
-    // 组件将要更新
-}
-componentDidUpdate(prevProps, prevState) {
-    // 组件已经更新
-}
-
-
-
 
    render() {
     console.log("组件渲染");
 
     return <div>{this.state.msg}</div>;
+  }
+  getSnapshotBeforeUpdate(prevProps: any, prevState: any) {
+    
+  }
+  componentDidUpdate(prevProps, prevState) {
+      
   }
 }
