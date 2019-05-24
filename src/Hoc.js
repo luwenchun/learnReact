@@ -1,47 +1,47 @@
-import React, { Component } from "react";
+// import React, { Component } from "react";
 
 
-// 高阶组件属性代理
- const Demo = (props) => {
-  return (
-    <div>
-	  My name is {props.name}
-	</div>
-  )
-};
+// // 高阶组件属性代理
+//  const Demo = (props) => {
+//   return (
+//     <div>
+// 	  My name is {props.name}
+// 	</div>
+//   )
+// };
 
-const HOC = (WrapperComponent) => {
-  return class Permission extends Component{
-    render(){
-      return (
-        <div>
-		  <header>nihao</header>
-		  <WrapperComponent {...this.props}/>
-		</div>
-	  )
-	}
-  }
-};
+// const HOC = (WrapperComponent) => {
+//   return class Permission extends Component{
+//     render(){
+//       return (
+//         <div>
+// 		  <header>nihao</header>
+// 		  <WrapperComponent {...this.props}/>
+// 		</div>
+// 	  )
+// 	}
+//   }
+// };
 
-const WithDemo = HOC(Demo);
+// const WithDemo = HOC(Demo);
 
-// 高阶组件的反向继承
+// // 高阶组件的反向继承
 
-const HOC = (WrapperComponent) => {
-  return class Permission extends WrapperComponent{
-    render(){
-      console.log(this.props);
-      return (
-        <div>
-		  <header>nihao</header>
-		  <WrapperComponent {...this.props}/>
-		</div>
-	  )
-	}
-  }
-};
+// const HOC = (WrapperComponent) => {
+//   return class Permission extends WrapperComponent{
+//     render(){
+//       console.log(this.props);
+//       return (
+//         <div>
+// 		  <header>nihao</header>
+// 		  <WrapperComponent {...this.props}/>
+// 		</div>
+// 	  )
+// 	}
+//   }
+// };
 
-const WithDemo = HOC(Demo);
+// const WithDemo = HOC(Demo);
 
 import React, { Component } from "react";
 
@@ -67,9 +67,9 @@ const withLog = Comp => {
   return props => <Comp {...props} />;
 };
 
-@withLog
-@withName
-@withLog
+// @withLog
+// @withName
+// @withLog
 class Kaikeba extends Component {
   render() {
     return (
@@ -82,4 +82,4 @@ class Kaikeba extends Component {
 const a=withLog(Kaikeba)
 const b=withName(a)
 const c=withLog(b)
-export default Kaikeba;
+export default c;

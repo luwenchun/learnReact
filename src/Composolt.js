@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import { Button } from 'antd';
+import { Button } from 'antd';
 //Dialog
 function Dialog(props) {
   return (
@@ -14,8 +14,8 @@ function Dialog(props) {
 
 function WelcomeDialog() {
   const confirmBtn = (
-    <button>ok</button>
-    // <Button  type="primary" onClick={() => alert("react确实好！")}>确定</Button>
+    // <button>ok</button>
+    <Button  type="primary" onClick={() => alert("react确实好！")}>确定</Button>
   );
   return (
     <Dialog color="green" footer={confirmBtn}>
