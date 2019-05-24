@@ -35,7 +35,7 @@ export default class Lifecycle extends Component {
 // react 16.6之后生命周期
 // 挂载阶段
 static getDerivedStateFromProps(nextProps, prevState) {
-    
+     return true
 }
 // render（）
 componentDidMount() {
@@ -43,7 +43,7 @@ componentDidMount() {
 }
 // 更新
 static getDerivedStateFromProps(nextProps, prevState) {
-    
+    return true
 }
 shouldComponentUpdate(nextProps, nextState, nextContext) {
      
