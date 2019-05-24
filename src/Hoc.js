@@ -67,9 +67,9 @@ const withLog = Comp => {
   return props => <Comp {...props} />;
 };
 
-// @withLog
-// @withName
-// @withLog
+@withLog
+@withName
+@withLog
 class Kaikeba extends Component {
   render() {
     return (
@@ -79,7 +79,7 @@ class Kaikeba extends Component {
     );
   }
 }
-const a=withLog(Kaikeba)
-const b=withName(a)
-const c=withLog(b)
-export default c;
+// const a=withLog(Kaikeba)
+// const b=withName(a)
+// const c=withLog(b)
+export default Kaikeba;
