@@ -1,14 +1,7 @@
 import React ,{Component,PureComponent}from "react"
 import Welcome  from './components/welcome'
 import ServiceMode from "./components/ServiceMode"
-// const jsx=<h1>hello</h1>
-// export default function demo() {
-//     return(
-//      <>
-//             {jsx}
-//       </>
-//     )
-// }
+
 import "./index.less"
 const listStatus={
     0:'已确认',
