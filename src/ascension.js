@@ -1,5 +1,6 @@
 // 状态提升demo
 import React, { Component } from "react";
+import { log } from "util";
 
 const scaleNames = {
     c: 'Celsius',
@@ -7,6 +8,7 @@ const scaleNames = {
 };
 
   function toCelsius(fahrenheit) {
+    
     return (fahrenheit - 32) * 5 / 9;
   }
   

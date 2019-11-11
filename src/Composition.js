@@ -4,8 +4,9 @@ function Dialog(props) {
   const color = props.color || "blue";
   return (
     <div style={{ border: `4px solid ${color}` }}>
-      {/* children是固定名称，类似于匿名插槽 */}
-      {props.children()}
+      {/* children是固定名称，类似于匿名插槽 一切合法的js表达式*/}
+      {props.children}
+      {/* {props.children()} */}
       <div>{props.foo("这个内容是dialog传递的")}</div>
       <div>
         {/* 具名插槽 */}
@@ -21,12 +22,16 @@ function WelcomeDialog() {
   return (
     //   传递任意合法表达式
     <Dialog color="red" footer={footer} foo={c => <p>{c}</p>}>
-      {c => (
+      <div>
+          <h1>欢迎光临</h1>
+          <p>感谢使用react</p>
+        </div>
+      {/* {c => (
         <div>
           <h1>欢迎光临</h1>
           <p>感谢使用react</p>
         </div>
-      )}
+      )} */}
     </Dialog>
   );
 }
@@ -34,6 +39,7 @@ function WelcomeDialog() {
 function FilterP(props) {
   return (
     <div>
+      {/* {props.children} */}
       {React.Children.map(props.children, child => {
         console.log(child); // vdom
         if (child.type !== "p") {
@@ -50,6 +56,7 @@ function RadioGroup(props) {
   return (
     <div>
       {React.Children.map(props.children, child =>
+      // console.log(child)
         React.cloneElement(child, { name: props.name })
       )}
     </div>
@@ -57,6 +64,7 @@ function RadioGroup(props) {
 }
 
 function Radio(props) {
+  console.log(props)
   return (
     <label>
       <input type="radio" name={props.name} />
@@ -68,19 +76,21 @@ function Radio(props) {
 export default function Composition() {
   return (
     <>
-      <WelcomeDialog />
-      <FilterP>
+      {/* <WelcomeDialog /> */}
+       {/* <FilterP>
         <h1>foo</h1>
         <p>bar</p>
         <h1>mike</h1>
         <p>jerry</p>
-      </FilterP>
-
-      <RadioGroup name="mvvm">
+      </FilterP>  */}
+     <input type="radio" value='1' name='1'/>1
+     <input type="radio" value='2' name='2'/>2
+     <input type="radio" value='3' name='3'/>3
+      <RadioGroup name="vue">
         <Radio value="vue">vue</Radio>
         <Radio value="react">react</Radio>
         <Radio value="angular">angular</Radio>
-      </RadioGroup>
+      </RadioGroup> 
     </>
   );
 }

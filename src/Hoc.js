@@ -19,19 +19,20 @@ function withLog(Component) {
 }
 
 
-// function logWithOpts(opt) {
-//     return function withLog(Component) {
-//         console.log(Component.name + "加强了");
+function logWithOpts(opt) {
+    return function withLog(Component) {
+        console.log(Component.name + "1111加强了");
       
-//         return props => {
-//           return <Component {...props} />;
-//         };
-//       }
-// }
+        return props => {
+          return <Component {...props} />;
+        };
+      }
+}
 
 @withLog
 @withStage
 @withLog
+// @logWithOpts({name:'tony'})
 class Kaikeba extends Component {
   render() {
     return (
