@@ -42,6 +42,22 @@ export default function HookTest() {
             setLoad(false)
         },2000)
     },[])
+
+    useEffect(()=>{
+        document.title=fruit
+    },[fruit])
+    // 副作用清除
+    useEffect(()=>{
+      var timer=  setInterval(()=>{
+           console.log("应用启用")
+        },1000)
+
+        return () => {
+            console.log("应用卸载")
+            clearInterval(timer)
+        };
+    },[])
+
     if(loading){
         return (
             <h1>loading 淡定</h1>
