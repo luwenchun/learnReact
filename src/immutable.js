@@ -1,91 +1,108 @@
-import React, { Component, PureComponent } from "react";
+import React,{Component,PureComponent} from 'react';
 // React15.3 PureComponent
 // React 16.6.0 React.memo
-
-class Person extends PureComponent {
-    componentWillReceiveProps(newProps) {
-        console.log(`我新的props的name是${newProps.name}，age是${newProps.age}。我以前的props的name是${this.props.name}，age是${this.props.age}是我要re-render了`);
-    }
-    // shouldComponentUpdate(newProps){
-    //     if(newProps.name!==this.props.name){
-    //         return true;
+import { Map,List,is } from "immutable";
+class ComponentSon extends PureComponent{//缺点 只解决基本数据类型，对象，数组，数组对象无法解决
+    // shouldComponentUpdate(nextProps,nextState){
+    //     if(this.props.sonStr !== nextProps.sonStr){
+    //         return true
     //     }
-    //     if(newProps.age!==this.props.age){
-    //         return true;
-    //     }
+    //     // if(this.props.sonObj !== nextProps.sonObj){
+    //     //     return true
+    //     // }
+    //     // if(!is(Map(this.props.sonObj),Map(nextProps.sonObj))){
+    //     //     return true
+    //     // }
+    //     // let propsonArr=List(this.props.sonArr);
+    //     // let nextsonArr=List(nextProps.sonArr);
+    //     // console.warn('propsonArr',propsonArr)
+    //     // console.warn('nextsonArr',nextsonArr)
+    //     // if (propsonArr.equals(nextsonArr)) {
+    //     //   return true;
+    //     // }  
     //     return false;
     // }
-    render() {
-        const { name, age } = this.props;
-        console.warn('render')
+    // shouldComponentUpdate(nextProps = {}, nextState = {}) {
+    //     const thisProps = nextProps || {}, thisState = nextState|| {};
+      
+    //     if (Object.keys(thisProps).length !== Object.keys(nextProps).length ||
+    //         Object.keys(thisState).length !== Object.keys(nextState).length) {
+    //       return true;
+    //     }
+      
+    //     for (const key in nextProps) {
+    //       if (!is(thisProps[key], nextProps[key])) {
+    //         return true;
+    //       }
+    //     }
+      
+    //     for (const key in nextState) {
+    //       if (thisState[key] !== nextState[key] || !is(thisState[key], nextState[key])) {
+    //         return true;
+    //       }
+    //     }
+    //     return false;
+    //   }
+    render(){
+        console.log('ComponentSon rendered : ' + Date.now());
+        
         return (
-            <div>
-                <span>姓名:</span>
-                <span>{name}</span>
-                <span> age:</span>
-                <span>{age}</span>
-            </div>
+        <div style={{background:'orange'}}> {this.props.sonStr} 
+        <h3>str:{JSON.stringify(this.props.sonStr)}</h3>
+         <h3>obj:{JSON.stringify(this.props.sonObj)}</h3>
+         <h3>Arr:{JSON.stringify(this.props.sonArr)}</h3> 
+        </div>
         )
     }
+ }
+
+
+class App extends Component{
+
+  state = {
+    parentMsg:'parent',
+    sonStr:'son',
+    sonObj:{
+        name:'son',
+        val:'this is val of son'
+    },
+    sonArr:['son','this is val of son']
+  }
+  render(){
+      let {sonStr,sonObj,sonArr}=this.state;
+    //   console.log(Map(sonArr))
+        sonObj={...sonObj}
+      //  sonArr=Object.assign([],sonArr)//模拟reducer返回的新数组
+      //  console.warn('sonArr',sonArr)
+    return (
+      <div className="App">
+        <header style={{background:'pink'}} onClick={()=> {this.setState({parentMsg:'parent' + Date.now()})}}>
+          <p>
+           {this.state.parentMsg}
+          </p>
+        </header>
+        <button onClick={()=>
+            this.setState({
+                // sonObj:{...sonObj,val:'son'+ Date.now()}   
+                // sonObj:{...sonObj,val:'son'}   
+            })
+            // this.setState({
+            //     sonArr:sonArr.concat([{val:'son'+ Date.now(),name:'son'}])
+            //     // sonArr:[{val:'son',name:'son'},{val:'son',name:'son'}]
+            // })
+            
+          // this.setState(({sonObj}) =>{
+          //   return { 
+          //       sonObj:{
+          //         ...sonObj,
+          //         val:'son'
+          //       }
+          //   }
+          // }) 
+          }>修改子组件props</button>
+        <ComponentSon  sonStr={sonStr} sonObj={sonObj} />
+      </div>
+    );}
 }
-// const  Person = React.memo(({name,age})=>{
-//     console.warn('render');
-    
-//     return (
-//         <div>
-//             <span>姓名:</span>
-//             <span>{name}</span>
-//             <span> age:</span>
-//             <span>{age}</span>
-//         </div>
-//     )
-// })
 
-export default class extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            name: "",
-            age: "",
-            persons: []
-        }
-    }
-    _renderPerson=(person,index)=>{
-        console.log('render')
-        return (
-            <div key={index}>
-                <span>姓名:</span>
-                <span>{person.name}</span>
-                <span> age:</span>
-                <span>{person.age}</span>
-            </div>
-        )
-    }
-    render() {
-        const { name, age, persons } = this.state
-        return (
-            <div>
-                <span>姓名:</span><input value={name} name="name" onChange={this._handleChange.bind(this)}></input>
-                <span>年龄:</span><input value={age} name="age" onChange={this._handleChange.bind(this)}></input>
-                <input type="button" onClick={this._handleClick.bind(this)} value="确认"></input>
-                {persons.map((person, index) => (
-                    <Person key={index} name={person.name} age={person.age}></Person>
-                //   this._renderPerson(person,index)
-                ))}
-            </div>
-        )
-    }
-    _handleChange(event) {
-        this.setState({ [event.target.name]: event.target.value })
-    }
-    _handleClick() {
-        const { name, age } = this.state
-        this.setState({
-            name: "",
-            age: "",
-            persons: this.state.persons.concat([{ name: name, age: age }])
-        })
-
-    }
-}
-
+export default App;
